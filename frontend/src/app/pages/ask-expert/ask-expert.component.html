@@ -1,0 +1,75 @@
+<div class="ask-page">
+  <div class="page-header">
+    <div class="container">
+      <h1>👨‍🌾 Ask an Expert</h1>
+      <p>Submit your crop-related question and our agricultural experts will help you</p>
+    </div>
+  </div>
+
+  <div class="container">
+    @if (!submitted) {
+      <div class="form-card">
+        <h2>Submit Your Question</h2>
+
+        @if (error) {
+          <div class="error-msg">⚠️ {{ error }}</div>
+        }
+
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input
+              id="name"
+              type="text"
+              [(ngModel)]="form.farmer_name"
+              name="farmer_name"
+              placeholder="e.g. Ramesh Kumar"
+              maxlength="100"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="crop">Crop (optional)</label>
+            <select id="crop" [(ngModel)]="form.crop_id" name="crop_id">
+              <option [ngValue]="null">Select a crop...</option>
+              @for (crop of crops; track crop.id) {
+                <option [ngValue]="crop.id">{{ crop.icon }} {{ crop.name }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="question">Your Question *</label>
+            <textarea
+              id="question"
+              [(ngModel)]="form.question"
+              name="question"
+              placeholder="Describe the problem you're facing with your crop in detail..."
+              rows="6"
+              maxlength="2000"
+              required
+            ></textarea>
+            <span class="char-count">{{ form.question.length }}/2000</span>
+          </div>
+
+          <button type="submit" class="btn-submit" [disabled]="submitting">
+            @if (submitting) { Submitting... } @else { Submit Question }
+          </button>
+        </form>
+      </div>
+    }
+
+    @if (submitted) {
+      <div class="success-card">
+        <div class="success-icon">✅</div>
+        <h2>Question Submitted!</h2>
+        <p>Thank you for reaching out. Our agricultural experts will review your question and provide guidance soon.</p>
+        <div class="success-actions">
+          <button class="btn-new" (click)="resetForm()">Submit Another Question</button>
+          <a routerLink="/advisories" class="btn-browse">Browse Advisories</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>

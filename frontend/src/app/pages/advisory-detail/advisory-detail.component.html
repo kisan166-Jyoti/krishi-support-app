@@ -1,0 +1,79 @@
+@if (loading) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading advisory...</p>
+  </div>
+}
+
+@if (error) {
+  <div class="error-container">
+    <p>Advisory not found.</p>
+    <a routerLink="/advisories" class="btn-back">← Back to Advisories</a>
+  </div>
+}
+
+@if (advisory && !loading) {
+  <div class="detail-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a routerLink="/">Home</a>
+        <span>›</span>
+        <a routerLink="/advisories">Advisories</a>
+        <span>›</span>
+        <span>{{ advisory.title }}</span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="container">
+        <div class="header-meta">
+          <span class="crop-tag">{{ advisory.crop_icon }} {{ advisory.crop_name }}</span>
+          <span class="type-badge type-{{ advisory.type }}">
+            {{ getTypeIcon(advisory.type) }} {{ advisory.type | titlecase }}
+          </span>
+          <span class="severity-badge severity-{{ advisory.severity }}">
+            {{ advisory.severity | titlecase }} Severity
+          </span>
+        </div>
+        <h1>{{ advisory.title }}</h1>
+        <p class="summary">{{ advisory.summary }}</p>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="detail-content">
+      <div class="container">
+        <div class="sections-grid">
+          @if (advisory.type !== 'management') {
+            <div class="info-section symptoms">
+              <h2>🔍 Symptoms</h2>
+              <p>{{ advisory.symptoms }}</p>
+            </div>
+
+            <div class="info-section cause">
+              <h2>⚗️ Cause</h2>
+              <p>{{ advisory.cause }}</p>
+            </div>
+          }
+
+          <div class="info-section solution">
+            <h2>✅ Solution / Management</h2>
+            <p>{{ advisory.solution }}</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+          <h3>Have a specific question about this issue?</h3>
+          <a [routerLink]="['/ask-expert']" [queryParams]="{cropId: advisory.crop_id}" class="btn-ask">
+            Ask an Expert →
+          </a>
+        </div>
+
+        <a routerLink="/advisories" class="btn-back">← Back to Advisories</a>
+      </div>
+    </div>
+  </div>
+}

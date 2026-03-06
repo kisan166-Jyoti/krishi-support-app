@@ -1,0 +1,74 @@
+<div class="advisories-page">
+  <div class="page-header">
+    <div class="container">
+      <h1>Crop Advisories</h1>
+      <p>Disease, pest, and management guidance for your crops</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Filters -->
+    <div class="filters-bar">
+      <input
+        class="search-input"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="applySearch()"
+        placeholder="🔍 Search advisories..."
+      />
+
+      <select [(ngModel)]="selectedCropId" (change)="applyFilters()">
+        <option [ngValue]="null">All Crops</option>
+        @for (crop of crops; track crop.id) {
+          <option [ngValue]="crop.id">{{ crop.icon }} {{ crop.name }}</option>
+        }
+      </select>
+
+      <select [(ngModel)]="selectedType" (change)="applyFilters()">
+        <option value="">All Types</option>
+        <option value="disease">🦠 Disease</option>
+        <option value="pest">🐛 Pest</option>
+        <option value="management">🌿 Management</option>
+      </select>
+
+      @if (selectedCropId || selectedType || searchQuery) {
+        <button class="btn-clear" (click)="clearFilters()">✕ Clear</button>
+      }
+
+      <span class="result-count">{{ advisories.length }} result(s)</span>
+    </div>
+
+    <!-- Advisory Grid -->
+    @if (loading) {
+      <div class="loading">Loading advisories...</div>
+    }
+
+    <div class="advisory-grid">
+      @for (advisory of advisories; track advisory.id) {
+        <a [routerLink]="['/advisories', advisory.id]" class="advisory-card">
+          <div class="card-header">
+            <span class="crop-tag">{{ advisory.crop_icon }} {{ advisory.crop_name }}</span>
+            <span class="type-badge type-{{ advisory.type }}">
+              {{ getTypeIcon(advisory.type) }} {{ advisory.type }}
+            </span>
+          </div>
+          <h3>{{ advisory.title }}</h3>
+          <p class="summary">{{ advisory.summary }}</p>
+          <div class="card-footer">
+            <span class="severity-badge {{ getSeverityClass(advisory.severity) }}">
+              {{ advisory.severity }} severity
+            </span>
+            <span class="read-more">Read more →</span>
+          </div>
+        </a>
+      }
+
+      @if (!loading && advisories.length === 0) {
+        <div class="empty-state">
+          <p>No advisories found for the selected filters.</p>
+          <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

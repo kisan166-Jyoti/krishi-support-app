@@ -1,0 +1,68 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>🌾 Krishi Support</h1>
+    <p class="hero-subtitle">Expert agricultural advisories for Indian farmers</p>
+    <p class="hero-desc">Get crop-specific disease, pest, and management guidance from agricultural experts</p>
+    <div class="hero-actions">
+      <a routerLink="/advisories" class="btn btn-primary">Browse Advisories</a>
+      <a routerLink="/ask-expert" class="btn btn-secondary">Ask an Expert</a>
+    </div>
+  </div>
+</section>
+
+<!-- Crop Categories -->
+<section class="crops-section">
+  <div class="container">
+    <h2 class="section-title">Select Your Crop</h2>
+    <p class="section-desc">Browse advisories specific to your crop</p>
+
+    @if (loading) {
+      <div class="loading">Loading crops...</div>
+    }
+
+    @if (error) {
+      <div class="error-state">
+        <p>⚠️ Could not connect to the server. Make sure the backend is running on port 3000.</p>
+      </div>
+    }
+
+    <div class="crop-grid">
+      @for (crop of crops; track crop.id) {
+        <div class="crop-card" (click)="viewAdvisories(crop.id)">
+          <div class="crop-icon">{{ crop.icon }}</div>
+          <h3>{{ crop.name }}</h3>
+          <p>{{ crop.description }}</p>
+          <div class="card-footer">
+            <span class="count-badge">{{ advisoryCount[crop.id] || 0 }} advisories</span>
+            <span class="view-link">View →</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="container">
+    <h2 class="section-title">How Krishi Support Helps You</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>Diagnose Problems</h3>
+        <p>Identify diseases and pests early with detailed symptom guides</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💊</div>
+        <h3>Get Treatment Advice</h3>
+        <p>Evidence-based treatment recommendations with specific dosages</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍🌾</div>
+        <h3>Ask Experts</h3>
+        <p>Submit your specific crop questions and get personalized guidance</p>
+      </div>
+    </div>
+  </div>
+</section>
