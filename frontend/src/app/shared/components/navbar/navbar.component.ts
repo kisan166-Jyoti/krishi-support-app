@@ -19,6 +19,7 @@ export class NavbarComponent {
   ) {}
 
   logout() {
+    this.profileService.clear();
     this.authService.logout();
   }
 }

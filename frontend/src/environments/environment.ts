@@ -5,10 +5,10 @@
 // ──────────────────────────────────────────────────────────────
 export const environment = {
   production: false,
-  kisanClientId: 'YOUR_KISAN_CLIENT_ID',
-  kisanOAuthUiUrl: 'YOUR_KISAN_OAUTH_UI_URL',
-  kisanOAuthApiUrl: 'YOUR_KISAN_OAUTH_API_URL',
-  kisanApiBaseUrl: 'YOUR_KISAN_API_BASE_URL',
+  kisanClientId: 'd5f6da7b73a56d8e64bc6783ae3e1a1x',
+  kisanOAuthUiUrl: 'https://farmer-auth-dev.kisan.in/authenticate',
+  kisanOAuthApiUrl: 'https://api-development.kisan.io/api/farmers/auth/',
+  kisanApiBaseUrl: 'https://api-development.kisan.io/api/farmers/',
   callbackUrl: 'http://localhost:3000/auth/callback',
   apiBaseUrl: 'http://localhost:5000/api',
 };
