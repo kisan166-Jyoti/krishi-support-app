@@ -1,47 +1,10 @@
-<div class="auth-page">
+<div class="auth-redirect">
   <div class="auth-card">
-    <div class="auth-header">
-      <span class="auth-icon">🌱</span>
-      <h1>Krishi Support</h1>
-      <p>Sign in to your account</p>
-    </div>
-
-    <form (ngSubmit)="onSubmit()" #f="ngForm" class="auth-form">
-      @if (error) {
-        <div class="error-msg">{{ error }}</div>
-      }
-
-      <div class="field">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          [(ngModel)]="email"
-          name="email"
-          required
-          placeholder="you@example.com"
-          autocomplete="email"
-        />
-      </div>
-
-      <div class="field">
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          required
-          placeholder="Enter your password"
-          autocomplete="current-password"
-        />
-      </div>
-
-      <button type="submit" class="btn-primary" [disabled]="loading">
-        {{ loading ? 'Signing in…' : 'Sign In' }}
-      </button>
-    </form>
-
-    <p class="auth-link">Don't have an account? <a routerLink="/register">Register</a></p>
+    <span class="auth-icon">🌱</span>
+    <h2>Redirecting to Kisan Login…</h2>
+    <p>You will be redirected to the Kisan authentication portal to sign in.</p>
+    @if (error) {
+      <div class="error-msg">{{ error }}</div>
+    }
   </div>
 </div>

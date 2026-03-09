@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
+import { ProfileService } from '../../../core/services/profile.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,10 @@ import { AuthService } from '../../../core/services/auth.service';
 export class NavbarComponent {
   menuOpen = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    public profileService: ProfileService
+  ) {}
 
   logout() {
     this.authService.logout();

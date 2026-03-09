@@ -39,14 +39,8 @@ db.exec(`
     FOREIGN KEY (crop_id) REFERENCES crops(id)
   );
 
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    created_at TEXT DEFAULT (datetime('now'))
-  );
 `);
+
 
 // Seed data if tables are empty
 const cropCount = db.prepare('SELECT COUNT(*) as count FROM crops').get();

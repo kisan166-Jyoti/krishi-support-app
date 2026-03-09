@@ -1,0 +1,15 @@
+<div class="callback-page">
+  <div class="callback-card">
+    @if (!error) {
+      <span class="callback-icon">🌱</span>
+      <h2>Completing sign-in…</h2>
+      <p>Please wait while we verify your credentials.</p>
+      <div class="spinner"></div>
+    } @else {
+      <span class="callback-icon error">⚠️</span>
+      <h2>Authentication Failed</h2>
+      <p class="error-msg">{{ error }}</p>
+      <a href="/login" class="btn-retry">Try Again</a>
+    }
+  </div>
+</div>

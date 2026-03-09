@@ -1,4 +1,4 @@
-@if (authService.currentUser$ | async; as user) {
+@if (authService.currentUser$ | async) {
   <nav class="navbar">
     <div class="nav-container">
       <a routerLink="/" class="nav-brand">
@@ -15,7 +15,11 @@
         <li><a routerLink="/advisories" routerLinkActive="active" (click)="menuOpen=false">Advisories</a></li>
         <li><a routerLink="/ask-expert" routerLinkActive="active" (click)="menuOpen=false" class="btn-ask">Ask Expert</a></li>
         <li class="nav-user">
-          <span class="user-name">{{ user.name }}</span>
+          @if (profileService.currentProfile$ | async; as profile) {
+            <span class="user-name">{{ profile.first_name }} {{ profile.last_name }}</span>
+          } @else {
+            <span class="user-name">Farmer</span>
+          }
           <button class="btn-logout" (click)="logout()">Logout</button>
         </li>
       </ul>

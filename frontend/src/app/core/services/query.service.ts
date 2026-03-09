@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface QueryPayload {
   farmer_name: string;
@@ -19,7 +20,7 @@ export interface QueryResponse {
 
 @Injectable({ providedIn: 'root' })
 export class QueryService {
-  private apiUrl = 'http://localhost:5000/api/queries';
+  private apiUrl = `${environment.apiBaseUrl}/queries`;
 
   constructor(private http: HttpClient) {}
 

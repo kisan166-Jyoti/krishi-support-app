@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface Crop {
   id: number;
@@ -11,7 +12,7 @@ export interface Crop {
 
 @Injectable({ providedIn: 'root' })
 export class CropService {
-  private apiUrl = 'http://localhost:5000/api/crops';
+  private apiUrl = `${environment.apiBaseUrl}/crops`;
 
   constructor(private http: HttpClient) {}
 
