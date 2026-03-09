@@ -379,6 +379,7 @@ Response: { ...same fields as above... }
 ### Queries
 
 ```
+
 POST /api/queries                          [requires Authorization header]
 Body: { farmer_name, crop_id?, question }
 Response (201): { id, farmer_name, crop_id, question, status, submitted_at }
